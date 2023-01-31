@@ -18,8 +18,8 @@ Flags:
   -s, --set stringArray          set values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2)
   -S, --set-string stringArray   set STRING values on the command line (can specify multiple or separate values with commas: key1=val1,key2=val2)
   -F, --set-file stringArray     set values from respective files specified via the command line (can specify multiple or separate values with commas: key1=path1,key2=path2)
-  -v, --version                  print version
   -h, --help                     help for goet
+  -v, --version                  version for goet
 ```
 
 ## Example
