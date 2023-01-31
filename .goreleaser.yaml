@@ -1,0 +1,63 @@
+# doc: https://goreleaser.com
+project_name: goet
+before:
+  hooks:
+    - go mod tidy
+builds:
+  - id: goet
+    main: ./cmd/goet
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - windows
+      - darwin
+    ldflags:
+      - -s
+      - -w
+      - -X main.version={{ .Version }}
+      - -X main.commit={{ .Commit }}
+      - -X main.date={{ .Date }}
+      - -X main.builtBy=goreleaser
+
+archives:
+  - id: tar.gz
+    format: tar.gz
+    name_template: >-
+      {{ .ProjectName }}_
+      {{- tolower .Os }}_
+      {{- if eq .Arch "amd64" }}x86_64
+      {{- else if eq .Arch "386" }}i386
+      {{- else }}{{ .Arch }}{{ end }}
+      {{- if .Arm }}v{{ .Arm }}{{ end }}
+    # use zip for windows archives
+    format_overrides:
+      - goos: windows
+        format: zip
+  - id: binary
+    format: binary
+    name_template: >-
+      {{ .ProjectName }}_
+      {{- tolower .Os }}_
+      {{- if eq .Arch "amd64" }}x86_64
+      {{- else if eq .Arch "386" }}i386
+      {{- else }}{{ .Arch }}{{ end }}
+      {{- if .Arm }}v{{ .Arm }}{{ end }}
+
+release:
+  disable: true
+
+publishers:
+  - name: cp rename
+    cmd: cp {{ .ArtifactPath }} {{ .TMPDIR }}/{{ .ArtifactName }}
+    checksum: true
+  - name: gh release
+    env:
+      - GH_TOKEN={{ .Env.GH_TOKEN }}
+    cmd: gh release upload {{ .Tag }} {{ .TMPDIR }}/{{ .ArtifactName }}
+    checksum: true
+
+checksum:
+  name_template: 'checksums.txt'
+snapshot:
+  name_template: "{{ incpatch .Version }}-next"
