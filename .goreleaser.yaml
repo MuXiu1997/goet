@@ -1,0 +1,42 @@
+# doc: https://goreleaser.com
+project_name: goet
+before:
+  hooks:
+    - go mod tidy
+builds:
+  - id: goet
+    main: ./cmd/goet
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - windows
+      - darwin
+    ldflags:
+      - -s
+      - -w
+      - -X main.version={{ .Version }}
+      - -X main.commit={{ .Commit }}
+      - -X main.date={{ .Date }}
+      - -X main.builtBy=goreleaser
+
+archives:
+  - id: tar.gz
+    format: tar.gz
+    replacements:
+      386: i386
+    name_template: '{{ .ProjectName }}_{{ .Os }}_{{ .Arch }}'
+    # use zip for windows archives
+    format_overrides:
+      - goos: windows
+        format: zip
+  - id: binary
+    format: binary
+    replacements:
+      386: i386
+    name_template: '{{ .ProjectName }}_{{ .Os }}_{{ .Arch }}'
+
+checksum:
+  name_template: 'checksums.txt'
+snapshot:
+  name_template: "{{ .Version }}-next"
