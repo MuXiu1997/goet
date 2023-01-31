@@ -37,6 +37,26 @@ Hello MuXiu1997, you're currently in /Users/muxiu1997/Projects/goet
 
 prebuilt binaries are available on [release page](https://github.com/MuXiu1997/goet/releases)
 
+## Template Functions
+
+### Sprig
+
+see [Sprig](http://masterminds.github.io/sprig/)
+
+### YAML
+
+- `fromYaml` - fromYaml decodes YAML into a structured value, ignoring errors.
+- `mustFromYaml` - mustFromYaml decodes YAML into a structured value, returning errors.
+- `toYaml` - toYaml encodes an item into a YAML string, ignoring errors.
+- `mustToYaml` - mustToYaml encodes an item into a YAML string, returning errors.
+
+### TOML
+
+- `fromToml` - fromToml decodes TOML into a structured value, ignoring errors.
+- `mustFromToml` - mustFromToml decodes TOML into a structured value, returning errors.
+- `toToml` - toToml encodes an item into a TOML string, ignoring errors.
+- `mustToToml` - mustToToml encodes an item into a TOML string, returning errors.
+
 ## License
 
 [MIT](./LICENSE)
