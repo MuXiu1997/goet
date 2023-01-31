@@ -24,7 +24,7 @@ archives:
   - id: tar.gz
     format: tar.gz
     replacements:
-      386: i386
+      '386': i386
     name_template: '{{ .ProjectName }}_{{ .Os }}_{{ .Arch }}'
     # use zip for windows archives
     format_overrides:
@@ -33,7 +33,7 @@ archives:
   - id: binary
     format: binary
     replacements:
-      386: i386
+      '386': i386
     name_template: '{{ .ProjectName }}_{{ .Os }}_{{ .Arch }}'
 
 checksum:
