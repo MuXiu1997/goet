@@ -32,6 +32,21 @@ jobs:
         with:
           ref: ${{ steps.release.outputs.tag_name }}
 
+      - name: Set up Docker Buildx
+        if: ${{ steps.release.outputs.release_created }}
+        uses: docker/setup-buildx-action@v2
+
+      - name: Set up QEMU
+        if: ${{ steps.release.outputs.release_created }}
+        uses: docker/setup-qemu-action@v2
+
+      - name: Login to Docker Hub
+        if: ${{ steps.release.outputs.release_created }}
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
       - name: Go Release
         if: ${{ steps.release.outputs.release_created }}
         uses: goreleaser/goreleaser-action@v4
@@ -41,3 +56,12 @@ jobs:
           distribution: goreleaser
           version: latest
           args: release
+
+      - name: Update Docker Images Description
+        if: ${{ steps.release.outputs.release_created }}
+        uses: peter-evans/dockerhub-description@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          repository: muxiu1997/goet
+          short-description: single-executable template renderer, powered by go template, sprig.
