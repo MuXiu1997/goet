@@ -1,5 +1,9 @@
 # Goet 🖨️
 
+[![GitHub Release](https://img.shields.io/github/release/MuXiu1997/goet.svg)](https://github.com/MuXiu1997/goet/releases)
+[![Go Version](https://img.shields.io/github/go-mod/go-version/MuXiu1997/goet.svg)](https://golang.org/)
+[![License](https://img.shields.io/github/license/MuXiu1997/goet.svg.svg)](https://github.com/MuXiu1997/goet/blob/main/LICENSE)
+
 single-executable template renderer, powered by go template, sprig.
 
 ## Usage
@@ -33,9 +37,17 @@ EOF
 Hello MuXiu1997, you're currently in /Users/muxiu1997/Projects/goet
 ```
 
-## Install
+## Installation
 
-prebuilt binaries are available on [release page](https://github.com/MuXiu1997/goet/releases)
+### Prebuilt Binaries
+
+[release page](https://github.com/MuXiu1997/goet/releases)
+
+### Docker
+
+```bash
+docker run --rm muxiu1997/goet -h
+```
 
 ## Template Functions
 
@@ -46,7 +58,8 @@ prebuilt binaries are available on [release page](https://github.com/MuXiu1997/g
 ### OS/FS/PATH
 
 - `lookPath` - lookPath runs exec.LookPath on name and returns the path or an empty string if the name is not found.
-- `lstat` - lstat runs os.Lstat on name and returns structured data that contains the fields `name`, `size`, `mode`, `perm`, `modTime`, `isDir`, and `type` if name exists.
+- `lstat` - lstat runs os.Lstat on name and returns structured data that contains the
+  fields `name`, `size`, `mode`, `perm`, `modTime`, `isDir`, and `type` if name exists.
 - `readFile` - readFile runs os.ReadFile on name and returns the contents.
 - `cmdOutput` - cmdOutput runs exec.Command on name and args and returns the output.
 - `glob` - glob runs filepath.Glob on pattern and returns the matches.
@@ -67,9 +80,10 @@ prebuilt binaries are available on [release page](https://github.com/MuXiu1997/g
 - `mustToToml` - mustToToml encodes an item into a TOML string, returning errors.
 
 ## Related
+
 - sprig template functions - [Masterminds/sprig](https://github.com/Masterminds/sprig)
 - additional template functions reference - [twpayne/chezmoi](https://github.com/twpayne/chezmoi)
 
 ## License
 
-[MIT](./LICENSE)
+[MIT](https://github.com/MuXiu1997/goet/blob/main/LICENSE)
