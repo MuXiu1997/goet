@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.0](https://github.com/MuXiu1997/goet/compare/v0.1.0-rc2...v0.1.0) (2023-02-01)
+
+
+### Miscellaneous Chores
+
+* release 0.1.0 ([7d259ca](https://github.com/MuXiu1997/goet/commit/7d259cac213120db3c41e7dda408128d546037e6))
+
 ## 0.1.0-rc2 (2023-02-01)
 
 
