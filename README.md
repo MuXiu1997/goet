@@ -41,7 +41,16 @@ prebuilt binaries are available on [release page](https://github.com/MuXiu1997/g
 
 ### Sprig
 
-see [Sprig](http://masterminds.github.io/sprig/)
+- [Sprig Function Documentation](http://masterminds.github.io/sprig/)
+
+### OS/FS/PATH
+
+- `lookPath` - lookPath runs exec.LookPath on name and returns the path or an empty string if the name is not found.
+- `lstat` - lstat runs os.Lstat on name and returns structured data that contains the fields `name`, `size`, `mode`, `perm`, `modTime`, `isDir`, and `type` if name exists.
+- `readFile` - readFile runs os.ReadFile on name and returns the contents.
+- `cmdOutput` - cmdOutput runs exec.Command on name and args and returns the output.
+- `glob` - glob runs filepath.Glob on pattern and returns the matches.
+- `joinPath` - joinPath runs filepath.Join on elements and returns the joined path with the OS-specific path separator.
 
 ### YAML
 
@@ -56,6 +65,10 @@ see [Sprig](http://masterminds.github.io/sprig/)
 - `mustFromToml` - mustFromToml decodes TOML into a structured value, returning errors.
 - `toToml` - toToml encodes an item into a TOML string, ignoring errors.
 - `mustToToml` - mustToToml encodes an item into a TOML string, returning errors.
+
+## Related
+- sprig template functions - [Masterminds/sprig](https://github.com/Masterminds/sprig)
+- additional template functions reference - [twpayne/chezmoi](https://github.com/twpayne/chezmoi)
 
 ## License
 

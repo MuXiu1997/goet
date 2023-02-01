@@ -3,6 +3,7 @@ package templaterenderer
 import (
 	"bytes"
 	"github.com/Masterminds/sprig/v3"
+	"github.com/MuXiu1997/goet/pkg/templatefunc/osfspath"
 	"github.com/MuXiu1997/goet/pkg/templatefunc/toml"
 	"github.com/MuXiu1997/goet/pkg/templatefunc/yaml"
 	ttemplate "text/template"
@@ -12,6 +13,7 @@ import (
 func Render(name string, templateContent string, data any) (string, error) {
 	t, err := ttemplate.New(name).
 		Funcs(sprig.TxtFuncMap()).
+		Funcs(osfspath.FuncMap()).
 		Funcs(yaml.FuncMap()).
 		Funcs(toml.FuncMap()).
 		Parse(templateContent)
