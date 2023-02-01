@@ -2,7 +2,7 @@
 
 [![GitHub Release](https://img.shields.io/github/release/MuXiu1997/goet.svg)](https://github.com/MuXiu1997/goet/releases)
 [![Go Version](https://img.shields.io/github/go-mod/go-version/MuXiu1997/goet.svg)](https://golang.org/)
-[![License](https://img.shields.io/github/license/MuXiu1997/goet.svg.svg)](https://github.com/MuXiu1997/goet/blob/main/LICENSE)
+[![License](https://img.shields.io/github/license/MuXiu1997/goet.svg)](https://github.com/MuXiu1997/goet/blob/main/LICENSE)
 
 single-executable template renderer, powered by go template, sprig.
 
