@@ -4,6 +4,12 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
+    inputs:
+      version:
+        required: true
+        description: Version to release
+        type: string
 
 jobs:
   release:
@@ -19,6 +25,7 @@ jobs:
         with:
           release-type: go
           package-name: ${{ github.event.repository.name }}
+          release-as: ${{ github.event.inputs.version }}
 
       - name: Setup Go
         if: ${{ steps.release.outputs.release_created }}
