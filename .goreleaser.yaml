@@ -1,8 +1,10 @@
 # doc: https://goreleaser.com
 project_name: goet
+
 before:
   hooks:
     - go mod tidy
+
 builds:
   - id: goet
     main: ./cmd/goet
@@ -12,6 +14,11 @@ builds:
       - linux
       - windows
       - darwin
+    goarch:
+      - amd64
+      - "386"
+      - arm64
+      - arm
     ldflags:
       - -s
       - -w
@@ -19,6 +26,77 @@ builds:
       - -X main.commit={{ .Commit }}
       - -X main.date={{ .Date }}
       - -X main.builtBy=goreleaser
+    mod_timestamp: "{{ .CommitTimestamp }}"
+
+dockers:
+  - use: buildx
+    goos: linux
+    goarch: amd64
+    image_templates:
+      - "MuXiu1997/{{ .ProjectName }}:{{ .Version }}-amd64"
+      - "MuXiu1997/{{ .ProjectName }}:latest-amd64"
+    build_flag_templates:
+      - "--platform=linux/amd64"
+      - "--push"
+      - "--label=org.opencontainers.image.created={{ .Date }}"
+      - "--label=org.opencontainers.image.title={{ .ProjectName }}"
+      - "--label=org.opencontainers.image.revision={{ .FullCommit }}"
+      - "--label=org.opencontainers.image.version={{ .Version }}"
+  - use: buildx
+    goos: linux
+    goarch: "386"
+    image_templates:
+      - "MuXiu1997/{{ .ProjectName }}:{{ .Version }}-i386"
+      - "MuXiu1997/{{ .ProjectName }}:latest-i386"
+    build_flag_templates:
+      - "--platform=linux/386"
+      - "--push"
+      - "--label=org.opencontainers.image.created={{ .Date }}"
+      - "--label=org.opencontainers.image.title={{ .ProjectName }}"
+      - "--label=org.opencontainers.image.revision={{ .FullCommit }}"
+      - "--label=org.opencontainers.image.version={{ .Version }}"
+  - use: buildx
+    goos: linux
+    goarch: arm64
+    image_templates:
+      - "MuXiu1997/{{ .ProjectName }}:{{ .Version }}-arm64"
+      - "MuXiu1997/{{ .ProjectName }}:latest-arm64"
+    build_flag_templates:
+      - "--platform=linux/arm64"
+      - "--push"
+      - "--label=org.opencontainers.image.created={{ .Date }}"
+      - "--label=org.opencontainers.image.title={{ .ProjectName }}"
+      - "--label=org.opencontainers.image.revision={{ .FullCommit }}"
+      - "--label=org.opencontainers.image.version={{ .Version }}"
+  - use: buildx
+    goos: linux
+    goarch: arm
+    image_templates:
+      - "MuXiu1997/{{ .ProjectName }}:{{ .Version }}-arm"
+      - "MuXiu1997/{{ .ProjectName }}:latest-arm"
+    build_flag_templates:
+      - "--platform=linux/arm/v6"
+      - "--push"
+      - "--label=org.opencontainers.image.created={{ .Date }}"
+      - "--label=org.opencontainers.image.title={{ .ProjectName }}"
+      - "--label=org.opencontainers.image.revision={{ .FullCommit }}"
+      - "--label=org.opencontainers.image.version={{ .Version }}"
+
+docker_manifests:
+  - use: buildx
+    name_template: "MuXiu1997/{{ .ProjectName }}:{{ .Version }}"
+    image_templates:
+      - "MuXiu1997/{{ .ProjectName }}:{{ .Version }}-amd64"
+      - "MuXiu1997/{{ .ProjectName }}:{{ .Version }}-i386"
+      - "MuXiu1997/{{ .ProjectName }}:{{ .Version }}-arm64"
+      - "MuXiu1997/{{ .ProjectName }}:{{ .Version }}-arm"
+  - use: buildx
+    name_template: "MuXiu1997/{{ .ProjectName }}:latest"
+    image_templates:
+      - "MuXiu1997/{{ .ProjectName }}:latest-amd64"
+      - "MuXiu1997/{{ .ProjectName }}:latest-i386"
+      - "MuXiu1997/{{ .ProjectName }}:latest-arm64"
+      - "MuXiu1997/{{ .ProjectName }}:latest-arm"
 
 archives:
   - id: tar.gz
