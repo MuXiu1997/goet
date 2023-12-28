@@ -54,6 +54,11 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
+      - name: Install UPX
+        uses: crazy-max/ghaction-upx@v3
+        with:
+          install-only: true
+
       - name: Go Release
         if: ${{ steps.release.outputs.release_created }}
         uses: goreleaser/goreleaser-action@v4
