@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"github.com/Masterminds/sprig/v3"
 	"github.com/MuXiu1997/goet/pkg/templatefunc/osfspath"
+	"github.com/MuXiu1997/goet/pkg/templatefunc/template"
 	"github.com/MuXiu1997/goet/pkg/templatefunc/toml"
 	"github.com/MuXiu1997/goet/pkg/templatefunc/yaml"
 	ttemplate "text/template"
@@ -17,6 +18,7 @@ func Render(templateContext *tc.TemplateContext) (string, error) {
 		Funcs(osfspath.FuncMap()).
 		Funcs(yaml.FuncMap()).
 		Funcs(toml.FuncMap()).
+		Funcs(template.FuncMap(templateContext)).
 		Parse(templateContext.TemplateContent)
 	if err != nil {
 		return "", err

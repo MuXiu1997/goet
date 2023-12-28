@@ -55,7 +55,14 @@ docker run --rm muxiu1997/goet -h
 
 - [Sprig Function Documentation](http://masterminds.github.io/sprig/)
 
-### OS/FS/PATH
+### Template
+
+- `templateFilePath` - templateFilePath returns the path of the template file. If the template is stdin, "/dev/stdin" is returned. If the template is a URL, the URL is returned.
+- `templateDirPath` - templateDirPath returns the directory of the template file. If the template is stdin, "/dev" is returned. If the template is a URL, "" is returned.
+- `outputFilePath` - outputFilePath returns the path of the output file. If the output is stdout, "/dev/stdout" is returned.
+- `outputDirPath` - outputDirPath returns the directory of the output file. If the output is stdout, "/dev" is returned.
+
+### OS / FS / PATH
 
 - `lookPath` - lookPath runs exec.LookPath on name and returns the path or an empty string if the name is not found.
 - `lstat` - lstat runs os.Lstat on name and returns structured data that contains the
