@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/MuXiu1997/goet/pkg/file"
+	tc "github.com/MuXiu1997/goet/pkg/templatecontext"
 	"github.com/MuXiu1997/goet/pkg/templaterenderer"
 	"github.com/spf13/cobra"
 )
@@ -39,15 +40,15 @@ func initConfig() {
 }
 
 func run() error {
-	templateContent, err := file.ReadFile(template)
-	if err != nil {
-		return err
-	}
 	values, err := options.MergeValues()
 	if err != nil {
 		return err
 	}
-	result, err := templaterenderer.Render(template, string(templateContent), values)
+	templateContext, err := tc.NewTemplateContext(template, output, values)
+	if err != nil {
+		return err
+	}
+	result, err := templaterenderer.Render(templateContext)
 	if err != nil {
 		return err
 	}
